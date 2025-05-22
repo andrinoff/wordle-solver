@@ -1,4 +1,6 @@
 import numpy as np
+import random
+import time
 
 class Brute_Force:
     def __init__(self):
@@ -7,6 +9,8 @@ class Brute_Force:
         self.green =  []
         self.last_guess = ""
         self.grey = []
+
+
 
     def start(self):
         for i in range(0,5):
@@ -56,6 +60,40 @@ class Brute_Force:
                     self.words = np.delete(self.words, word_index)
         self.green = [l for l in self.green if l != letter]
 
+    def simulate(self):
+        target = random.choice(self.words)
+        print(f"[DEBUG] Target word: {target}")
+        for _ in range(5):  # 5 Wordle attempts
+            if len(self.words) == 0:
+
+                print("No words left to guess.")
+                return False
+                break
+            self.last_guess = random.choice(self.words)
+            print(f"Guess: {self.last_guess}")
+            self.generate_feedback(self.last_guess, target)
+            for letter in self.last_guess:
+                if letter not in self.green and letter not in self.yellow:
+                    self.grey.append(letter)
+            self.deleteGreys()
+            self.deleteGreens(self.last_guess)
+            if self.last_guess == target:
+                print("Solved!")
+                return True
+                break
+
+        else:
+            return False
+            print("Failed to solve.")
+
+    def generate_feedback(self, guess, target):
+        self.green = []
+        self.yellow = []
+        for i, letter in enumerate(guess):
+            if target[i] == letter:
+                self.green.append(letter)
+            elif letter in target and letter not in self.green:
+                self.yellow.append(letter)
 
 
 
@@ -63,5 +101,14 @@ class Brute_Force:
     def test(self, word):
         print(self.words[word])
 
-solution1 = Brute_Force()
-solution1.start()
+success = 0
+fail = 0
+for i in range (0,1000):
+    solution1 = Brute_Force()
+    result = solution1.simulate()
+    if result:
+        success+=1
+    else:
+        fail+=1
+print(success)
+print(fail)
