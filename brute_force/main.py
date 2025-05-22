@@ -3,14 +3,10 @@ import numpy as np
 class Brute_Force:
     def __init__(self):
         self.words = np.loadtxt("words.txt", dtype=str)
-        self.letter1 = ""
-        self.letter2 = ""
-        self.letter3 = ""
-        self.letter4 = ""
-        self.letter5 = ""
         self.yellow = []
         self.green =  []
         self.last_guess = ""
+        self.grey = []
 
     def start(self):
         for i in range(0,5):
@@ -28,28 +24,22 @@ class Brute_Force:
                     self.green.append(green_letter)
                 else :
                     break
-            self.deleteYellows()
+            for letter in self.last_guess:
+                if letter not in self.yellow and letter not in self.green:
+                    self.grey.append(letter)
+            self.deleteGreys()
             self.deleteGreens(self.last_guess)
             print(self.words)
             if len(self.words) <= 2:
                 break
 
-    def deleteYellows(self):
-        for letter in self.yellow:
+    def deleteGreys(self):
+        for letter in self.grey:
             for word in self.words:
                 # If none found -- delete
                 word_index = np.where(self.words == word)
-                if letter not in word:
-
-                    # TODO: add delete here
+                if letter in word:
                     self.words = np.delete(self.words, word_index)
-                # Second round, deleting where the letter would be green
-                else:
-                    index = self.getPositionOfTheLetter(self.last_guess, letter)
-                    if list(word)[index] == letter:
-                        self.words = np.delete(self.words, word_index)
-        self.yellow = [l for l in self.yellow if l != letter]
-
     def getPositionOfTheLetter(self, guess, letter):
         return list(guess).index(letter)
 
