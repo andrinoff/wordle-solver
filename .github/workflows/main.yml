@@ -26,17 +26,19 @@ jobs:
     # Install dependencies with `pip`
     - name: Install requirements
       run: |
-        echo "Running $RUNS simulations"
+
         python3 -m pip install --upgrade pip setuptools wheel
         python3 -m pip install -r requirements.txt
-      env:
-        RUNS: 100000
+
 
 
 
     # Generate all statistics images
     - name: Test1
       run: |
+        echo "Running $RUNS simulations"
         cd brute_force
         python3 main.py
+      env:
+        RUNS: "100000"
 
