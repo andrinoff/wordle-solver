@@ -1,6 +1,10 @@
 import numpy as np
 import random
 import time
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 
 class Brute_Force:
     def __init__(self):
@@ -9,6 +13,8 @@ class Brute_Force:
         self.green =  []
         self.last_guess = ""
         self.grey = []
+
+
 
 
 
@@ -64,13 +70,21 @@ class Brute_Force:
         target = random.choice(self.words)
         print(f"[DEBUG] Target word: {target}")
         for _ in range(5):  # 5 Wordle attempts
+            if _ == 0:
+                self.last_guess = "arose"
+            elif len(self.words) == 0:
+                print("No words left to guess.")
+                break
+            else:
+                self.last_guess = random.choice(self.words)
+
             if len(self.words) == 0:
 
                 print("No words left to guess.")
                 return False
                 break
-            self.last_guess =random.choice(self.words)
-            # print(f"Guess: {self.last_guess}")
+
+            print(f"Guess: {self.last_guess}")
             self.generate_feedback(self.last_guess, target)
             for letter in self.last_guess:
                 if letter not in self.green and letter not in self.yellow:
@@ -81,7 +95,6 @@ class Brute_Force:
                 print("Solved!")
                 return True
                 break
-
         else:
             return False
             print("Failed to solve.")
@@ -100,10 +113,10 @@ class Brute_Force:
 
     def test(self, word):
         print(self.words[word])
-
+test_runs = os.getenv("RUNS")
 success = 0
 fail = 0
-for i in range (0,100):
+for i in range (0, int(test_runs)):
     solution1 = Brute_Force()
     result = solution1.simulate()
     if result:

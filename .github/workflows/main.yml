@@ -28,6 +28,10 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip setuptools wheel
         python3 -m pip install -r requirements.txt
+      env:
+        RUNS: 100000
+
+
 
     # Generate all statistics images
     - name: Test1
