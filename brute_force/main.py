@@ -69,8 +69,8 @@ class Brute_Force:
                 print("No words left to guess.")
                 return False
                 break
-            self.last_guess = random.choice(self.words)
-            print(f"Guess: {self.last_guess}")
+            self.last_guess =random.choice(self.words)
+            # print(f"Guess: {self.last_guess}")
             self.generate_feedback(self.last_guess, target)
             for letter in self.last_guess:
                 if letter not in self.green and letter not in self.yellow:
@@ -103,7 +103,7 @@ class Brute_Force:
 
 success = 0
 fail = 0
-for i in range (0,1000):
+for i in range (0,100):
     solution1 = Brute_Force()
     result = solution1.simulate()
     if result:
