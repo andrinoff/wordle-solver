@@ -38,7 +38,7 @@ jobs:
         python3 main.py
       env:
         RUNS: "10000"
-        RANDOM: False
+        RANDOM: True
 
     - name: Test with random
       run: |
@@ -47,5 +47,5 @@ jobs:
         python3 main.py
       env:
         RUNS: "10000"
-        RANDOM: True
+        RANDOM: False
 
