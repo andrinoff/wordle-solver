@@ -17,16 +17,21 @@ class Bit_Method:
         return -math.log2(p)
     def calculate_expected_entropy(self, guess):
         print ("made it to calculate expected entropy")
-        total_entropy = 0
+
         for word in self.words:
+            total_entropy = 0
             feedback = self.generate_feedback(guess, word)
             # Calculate probability of this feedback
             # This is a simplification; a full implementation would need to count how many words produce this feedback
+            # print(len(self.tempWords))
             p = 1 / len(self.tempWords)
             # print (p)
             # print (word+guess)
+
+            print (word+guess)
             self.tempWords = self.words
             total_entropy += self.calculate_entropy(p)
+            print (total_entropy)
         return total_entropy
 
     def generate_feedback(self, guess, target): # target would be any word, guess would be... every word too??
@@ -40,13 +45,11 @@ class Bit_Method:
                 yellow.append(letter)
             else:
                 grey.append(letter)
+        filtered_words = []
         for word in self.words:
-            print (word + " checking")
-            for l in grey:
-                if l in word:
-                    print ("Deleting " + word )
-                    word_index = np.where(self.words == word)
-                    self.tempWords = np.delete(self.words, word_index)
+            if all(l not in word for l in grey):
+                filtered_words.append(word)
+        self.tempWords = np.array(filtered_words)
         return (green, yellow)
     def deleteGreys(self):
         for letter in self.grey:
@@ -54,12 +57,10 @@ class Bit_Method:
                 # If none found -- delete
                 word_index = np.where(self.words == word)
                 if letter in word:
+
                     self.words = np.delete(self.words, word_index)
     def getPositionOfTheLetter(self, guess, letter):
         return list(guess).index(letter)
-
-
-
 
 # Caution: will ONLY work the the said letter repeats only once for now
     def deleteGreens(self, guess):
