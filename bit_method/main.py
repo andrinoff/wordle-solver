@@ -23,8 +23,8 @@ class Bit_Method:
             # Calculate probability of this feedback
             # This is a simplification; a full implementation would need to count how many words produce this feedback
             p = 1 / len(self.tempWords)
-            print (p)
-            print (word+guess)
+            # print (p)
+            # print (word+guess)
             self.tempWords = self.words
             total_entropy += self.calculate_entropy(p)
         return total_entropy
