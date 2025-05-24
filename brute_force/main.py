@@ -1,7 +1,7 @@
 import numpy as np
 import random
-import time
 import os
+import time
 
 # For local testing
 from dotenv import load_dotenv
@@ -126,5 +126,6 @@ for i in range (0, int(test_runs)):
         success+=1
     else:
         fail+=1
-print("Successfull attempts: " + success)
-print("Failed attempts: " + fail)
+
+print("Successfull attempts: " + str(success))
+print("Failed attempts: " + str(fail))
