@@ -15,6 +15,7 @@ class Brute_Force:
         self.green =  []
         self.last_guess = ""
         self.grey = []
+        self.random = os.getenv("RANDOM")
 
 
 
@@ -72,7 +73,7 @@ class Brute_Force:
         target = random.choice(self.words)
         print(f"[DEBUG] Target word: {target}")
         for _ in range(5):  # 5 Wordle attempts
-            if _ == 0:
+            if _ == 0 and self.random == "False":
                 self.last_guess = "arose"
             elif len(self.words) == 0:
                 print("No words left to guess.")

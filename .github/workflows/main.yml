@@ -31,14 +31,21 @@ jobs:
         python3 -m pip install -r requirements.txt
 
 
-
-
-    # Generate all statistics images
-    - name: Test1
+    - name: Test with arose
       run: |
         echo "Running $RUNS simulations"
         cd brute_force
         python3 main.py
       env:
-        RUNS: "100000"
+        RUNS: "10000"
+        RANDOM: False
+
+    - name: Test with random
+      run: |
+        echo "Running $RUNS simulations"
+        cd brute_force
+        python3 main.py
+      env:
+        RUNS: "10000"
+        RANDOM: True
 
