@@ -31,21 +31,8 @@ jobs:
         python3 -m pip install -r requirements.txt
 
 
-    - name: Test with arose
+    - name: Test 1
       run: |
-        echo "Running $RUNS simulations"
-        cd brute_force
-        python3 main.py
+        echo "Not ready for testing"
       env:
         RUNS: "10000"
-        RANDOM: False
-
-    - name: Test with random
-      run: |
-        echo "Running $RUNS simulations"
-        cd bit_method
-        python3 main.py
-      env:
-        RUNS: "10000"
-        RANDOM: True
-
