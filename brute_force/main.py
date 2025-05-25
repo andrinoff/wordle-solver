@@ -71,7 +71,7 @@ class Brute_Force:
 
     def simulate(self):
         target = random.choice(self.words)
-        print(f"[DEBUG] Target word: {target}")
+        # print(f"[DEBUG] Target word: {target}")
         for _ in range(5):  # 5 Wordle attempts
             # print(self.random, type(self.random))
             if _ == 0 and self.random == "False":
@@ -88,7 +88,7 @@ class Brute_Force:
                 return False
                 break
 
-            print(f"Guess: {self.last_guess}")
+            # print(f"Guess: {self.last_guess}")
             self.generate_feedback(self.last_guess, target)
             for letter in self.last_guess:
                 if letter not in self.green and letter not in self.yellow:
