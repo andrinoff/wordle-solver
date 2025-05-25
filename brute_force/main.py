@@ -42,7 +42,7 @@ class Brute_Force:
                     self.grey.append(letter)
             self.deleteGreys()
             self.deleteGreens(self.last_guess)
-            print(self.words)
+            # print(self.words)
             if len(self.words) <= 2:
                 break
 
@@ -73,17 +73,18 @@ class Brute_Force:
         target = random.choice(self.words)
         print(f"[DEBUG] Target word: {target}")
         for _ in range(5):  # 5 Wordle attempts
+            # print(self.random, type(self.random))
             if _ == 0 and self.random == "False":
                 self.last_guess = "arose"
             elif len(self.words) == 0:
-                print("No words left to guess.")
+                # print("No words left to guess.")
                 break
             else:
                 self.last_guess = random.choice(self.words)
 
             if len(self.words) == 0:
 
-                print("No words left to guess.")
+                # print("No words left to guess.")
                 return False
                 break
 
@@ -95,12 +96,12 @@ class Brute_Force:
             self.deleteGreys()
             self.deleteGreens(self.last_guess)
             if self.last_guess == target:
-                print("Solved!")
+                # print("Solved!")
                 return True
                 break
         else:
             return False
-            print("Failed to solve.")
+            # print("Failed to solve.")
 
     def generate_feedback(self, guess, target):
         self.green = []
@@ -111,11 +112,6 @@ class Brute_Force:
             elif letter in target and letter not in self.green:
                 self.yellow.append(letter)
 
-
-
-
-    def test(self, word):
-        print(self.words[word])
 test_runs = os.getenv("RUNS")
 success = 0
 fail = 0

@@ -28,10 +28,10 @@ class Bit_Method:
             # print (p)
             # print (word+guess)
 
-            print (word+guess)
+            # print (word+guess)
             self.tempWords = self.words
             total_entropy += self.calculate_entropy(p)
-            print (total_entropy)
+            # print (total_entropy)
         return total_entropy
 
     def generate_feedback(self, guess, target): # target would be any word, guess would be... every word too??
@@ -57,7 +57,6 @@ class Bit_Method:
                 # If none found -- delete
                 word_index = np.where(self.words == word)
                 if letter in word:
-
                     self.words = np.delete(self.words, word_index)
     def getPositionOfTheLetter(self, guess, letter):
         return list(guess).index(letter)

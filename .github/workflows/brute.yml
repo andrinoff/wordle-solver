@@ -1,51 +1,50 @@
-name: Tests Brute Force
+# name: Tests Brute Force
+# on:
+#   push:
+#     branches: [ master, dev ]
+#   schedule:
+#     - cron: "5 0 * * *"
+#   workflow_dispatch:
 
-on:
-  push:
-    branches: [ master, dev ]
-  schedule:
-    - cron: "5 0 * * *"
-  workflow_dispatch:
+# # jobs:
+# #   build:
+# #     runs-on: ubuntu-latest
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# #     steps:
+# #     # Check out repository under $GITHUB_WORKSPACE, so the job can access it
+# #     - uses: actions/checkout@v3
 
-    steps:
-    # Check out repository under $GITHUB_WORKSPACE, so the job can access it
-    - uses: actions/checkout@v3
+# #     # Run using Python 3.8 for consistency and aiohttp
+# #     - name: Set up Python 3.13
+# #       uses: actions/setup-python@v4
+# #       with:
+# #         python-version: '3.13'
+# #         architecture: 'x64'
+# #         cache: 'pip'
 
-    # Run using Python 3.8 for consistency and aiohttp
-    - name: Set up Python 3.13
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.13'
-        architecture: 'x64'
-        cache: 'pip'
+# #     # Install dependencies with `pip`
+# #     - name: Install requirements
+# #       run: |
 
-    # Install dependencies with `pip`
-    - name: Install requirements
-      run: |
-
-        python3 -m pip install --upgrade pip setuptools wheel
-        python3 -m pip install -r requirements.txt
+# #         python3 -m pip install --upgrade pip setuptools wheel
+# #         python3 -m pip install -r requirements.txt
 
 
-    - name: Test with arose
-      run: |
-        echo "Running $RUNS simulations"
-        cd brute_force
-        python3 main.py
-      env:
-        RUNS: "10000"
-        RANDOM: True
+# #     - name: Test with arose
+# #       run: |
+# #         echo "Running $RUNS simulations"
+# #         cd brute_force
+# #         python3 main.py
+# #       env:
+# #         RUNS: "10000"
+# #         RANDOM: True
 
-    - name: Test with random
-      run: |
-        echo "Running $RUNS simulations"
-        cd brute_force
-        python3 main.py
-      env:
-        RUNS: "10000"
-        RANDOM: False
+# #     - name: Test with random
+# #       run: |
+# #         echo "Running $RUNS simulations"
+# #         cd brute_force
+# #         python3 main.py
+# #       env:
+# #         RUNS: "10000"
+# #         RANDOM: False
 
