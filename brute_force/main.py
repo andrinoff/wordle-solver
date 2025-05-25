@@ -71,7 +71,7 @@ class Brute_Force:
 
     def simulate(self):
         target = random.choice(self.words)
-        # print(f"[DEBUG] Target word: {target}")
+        # print(f"[DEBUG] Target word: {target}")   
         for _ in range(5):  # 5 Wordle attempts
             # print(self.random, type(self.random))
             if _ == 0 and self.random == "False":

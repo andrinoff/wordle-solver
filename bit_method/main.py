@@ -17,24 +17,21 @@ class Bit_Method:
         return -math.log2(p)
     def calculate_expected_entropy(self, guess):
         print ("made it to calculate expected entropy")
-
+        
+        total_entropy = 0 
         for word in self.words:
-            total_entropy = 0
-            feedback = self.generate_feedback(guess, word)
-            # Calculate probability of this feedback
-            # This is a simplification; a full implementation would need to count how many words produce this feedback
-            # print(len(self.tempWords))
-            p = 1 / len(self.tempWords)
-            # print (p)
-            # print (word+guess)
-
-            # print (word+guess)
+            self.tempList(guess, word)
+            if len(self.tempWords) != 0:
+                p = 1 / len(self.tempWords)
+            else: 
+                p = 1
+            entropy = self.calculate_entropy(p)
+            total_entropy+= entropy
+            print(str(p), str(entropy), guess, word, str(len(self.tempWords)))
             self.tempWords = self.words
-            total_entropy += self.calculate_entropy(p)
-            # print (total_entropy)
-        return total_entropy
+        return total_entropy/len(self.words)
 
-    def generate_feedback(self, guess, target): # target would be any word, guess would be... every word too??
+    def tempList(self, guess, target): # target would be any word, guess would be... every word too??
         green = []
         yellow = []
         grey = []
@@ -46,18 +43,22 @@ class Bit_Method:
             else:
                 grey.append(letter)
         filtered_words = []
-        for word in self.words:
-            if all(l not in word for l in grey):
-                filtered_words.append(word)
-        self.tempWords = np.array(filtered_words)
-        return (green, yellow)
-    def deleteGreys(self):
-        for letter in self.grey:
-            for word in self.words:
-                # If none found -- delete
-                word_index = np.where(self.words == word)
-                if letter in word:
-                    self.words = np.delete(self.words, word_index)
+        for letter in green:
+            position_green = self.getPositionOfTheLetter(guess, letter)
+            for word in self.tempWords:
+                if list(word)[position_green] != letter:
+                    word_index = np.where(self.tempWords == word)
+                    self.tempWords = np.delete(self.tempWords, word_index)
+      
+                        
+                
+        for l in grey:
+            for word in self.tempWords:
+                if l in list(word):
+                    index = np.where(self.tempWords == word)
+                    self.tempWords = np.delete(self.tempWords, index)
+        return
+   
     def getPositionOfTheLetter(self, guess, letter):
         return list(guess).index(letter)
 
@@ -78,4 +79,6 @@ class Bit_Method:
 
 
 bob = Bit_Method()
-bob.ALotOfPrints()
+final_result = bob.calculate_expected_entropy("which")
+
+print(final_result)
