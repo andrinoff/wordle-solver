@@ -1,0 +1,10 @@
+
+[package]
+name = "bit_method"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ferris-says = "0.3.2"
+prompted = "0.2.8"
+text_io = "0.1.13"
