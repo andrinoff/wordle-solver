@@ -1,2 +1,7 @@
 env
 __pycache__
+# Generated files
+*/target/
+
+# Well, this depends... See below!
+Cargo.lock
